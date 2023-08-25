@@ -12,7 +12,7 @@ namespace ConsoleApp4
         static void Main(string[] args)
         {
             var a = new A { Id = 1, Name = "John" };
-            var b = MapTo<A, B>(a);
+            var b = Mapper.Map<A, B>(a);
 
             Console.WriteLine(b.Id);
             Console.WriteLine(b.Name);
@@ -20,7 +20,23 @@ namespace ConsoleApp4
             Console.ReadKey();
         }
 
-        static TTarget MapTo<TSource, TTarget>(TSource source)
+    }
+
+    public class A
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class B
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class Mapper
+    {
+        public static TTarget Map<TSource, TTarget>(TSource source)
         {
             var sourceType = typeof(TSource);
             var targetType = typeof(B);
@@ -49,17 +65,6 @@ namespace ConsoleApp4
 
             return (TTarget)obj;
         }
-    }
 
-    public class A
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class B
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }
